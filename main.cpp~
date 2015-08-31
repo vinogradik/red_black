@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <time.h>
+double* Enter (int*, const char*);
+double* Func (int*);
+int Print (int, double*);
+int PrintS (double*, int); 
+double* Solve (int, double*);
+int main (void)
+{
+	int n, i, t;
+	double start, time;
+	double *a;
+	double *x;
+	char *s;
+	printf("Enter the matrix A\nfrom file: 0\ngenerate: 1\n");
+	if(scanf("%d", &t) == 0)
+	{
+		printf("\nError\n");
+		return 1;
+	}
+	switch (t)
+	{
+	case 0:
+		  {
+			  printf("Enter file name:\n");
+			  scanf("%s", &s);
+			  //printf("%s", s);
+			  a = Enter(&n, s);
+			  /*if (a == 0)
+			  {
+				  printf("\nError\n");
+				  return 1;
+			  }*/
+			  break;
+		  }
+	case 1:
+		  {
+			  printf("Enter n: ");							
+			  scanf("%d", &n);
+			  printf("\n");
+			  a = Func(&n);
+			  /*if (a == 0)
+			  {
+				  printf("\nError\n");
+				  return 1;
+			  }*/
+			  break;
+		  }
+	default:
+		{
+			printf("\nError\n");
+			return 1;
+		}
+
+	}
+	start = clock();
+
+	x = Solve(n, a);
+	time = (double)(clock() - start) / CLOCKS_PER_SEC;
+	PrintS(x, n);
+
+	
+	printf("\n%lf\n", time);
+
+	
+
+
+	return 0;
+}
